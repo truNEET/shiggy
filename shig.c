@@ -32,6 +32,12 @@ void png_write(png_t *self, void *buffer, size_t size)
 
 void png_close(png_t *self)
 {
+	char buffer[] = {
+		'I', 'E', 'N', 'D'
+	};
+
+	png_write(self, &buffer, sizeof(buffer));
+	
 	fclose(self->fp);
 	free(self);
 }
